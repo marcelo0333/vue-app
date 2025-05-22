@@ -1,69 +1,87 @@
 <template>
   <div>
-    <button
-      @click="onClick"
-      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-    >
-      Enviar
-    </button>
-  </div>
-  <div
-    @mouseover="onMouseover"
-    @mouseout="onMouseout"
-    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-  >
-    Passa aqui
-  </div>
-  <div>
-    <form action="https://google.com" @submit.once="onClick">
-      <input @keyup="onKeyUp"
-        type="text"
-        name="name"
-        id="name"
-        class="bg-gray-200 border border-gray-300 rounded py-2 px-4 mb-4"
-        placeholder="Nome">
-      <button
-        type="submit"
-        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-      >
-        Enviar
-      </button>
-    </form>
+    {{ fullName }}
+    <h2 class="bg-amber-950 p-1.5 ">Todos Incompletas</h2>
+    <div v-for="todo in unCompleted" :key="todo.id" class="bg-gray-200 p-4 mb-2">
+      {{ todo.title }} <span v-if="todo.completed">Completed</span>
+    </div>
+    <h2 class="bg-amber-950 p-1.5">Todos Completas</h2>
+    <div v-for="todo in completed" :key="todo.id" class="bg-gray-200 p-4 mb-2">
+      {{ todo.title }} <span v-if="todo.completed">Completed</span>
+    </div>
+    <br><br>
+     <div v-for="todo in todos" :key="todo.id" class="bg-gray-200 p-4 mb-2">
+      <input
+      v-model="todo.completed"
+      type="checkbox"
+      class="mr-2">
+    {{ todo.title }}
+    </div>
   </div>
 </template>
 
 <!-- eslint-disable vue/block-lang -->
 <script>
-// import HeaderApp from './components/HeaderApp.vue'
-
 export default {
   name: 'App',
   components: {
-    // HeaderApp,
   },
   data() {
     return {
-      showHeader: true,
+      user: {
+        name: 'John Doe',
+        lastName: 'Doe',
+      },
+      todos:[
+          {
+            "userId": 1,
+            "id": 1,
+            "title": "delectus aut autem",
+            "completed": false
+          },
+          {
+            "userId": 1,
+            "id": 2,
+            "title": "quis ut nam facilis et officia qui",
+            "completed": false
+          },
+          {
+            "userId": 1,
+            "id": 3,
+            "title": "fugiat veniam minus",
+            "completed": false
+          },
+          {
+            "userId": 1,
+            "id": 4,
+            "title": "et porro tempora",
+            "completed": true
+          },
+          {
+            "userId": 1,
+            "id": 5,
+            "title": "laboriosam mollitia et enim quasi adipisci quia provident illum",
+            "completed": false
+          }
+        ],
+
+    }
+  },
+  computed: {
+    fullName() {
+      return `${this.user.name} ${this.user.lastName}`;
+    },
+    unCompleted(){
+      return this.todos.filter(todo => todo.completed === false);
+    },
+     completed(){
+      return this.todos.filter(todo => todo.completed === true);
     }
   },
   methods: {
-    onClick($event) {
-      console.log('click', $event)
-      // $event.preventDefault();
-      // alert('clicou');
-      // this.showHeader = !this.showHeader;
-    },
-    onMouseover() {
-      console.log('mouseover')
-    },
-    onMouseout() {
-      console.log('mouseout')
-    },
-     onKeyUp($event) {
-      console.log('keyup', $event)
-    },
   },
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+</style>
