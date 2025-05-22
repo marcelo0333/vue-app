@@ -1,23 +1,41 @@
 <template>
   <div>
-    {{ fullName }}
-    <h2 class="bg-amber-950 p-1.5 ">Todos Incompletas</h2>
-    <div v-for="todo in unCompleted" :key="todo.id" class="bg-gray-200 p-4 mb-2">
-      {{ todo.title }} <span v-if="todo.completed">Completed</span>
-    </div>
-    <h2 class="bg-amber-950 p-1.5">Todos Completas</h2>
-    <div v-for="todo in completed" :key="todo.id" class="bg-gray-200 p-4 mb-2">
-      {{ todo.title }} <span v-if="todo.completed">Completed</span>
-    </div>
-    <br><br>
-     <div v-for="todo in todos" :key="todo.id" class="bg-gray-200 p-4 mb-2">
-      <input
-      v-model="todo.completed"
-      type="checkbox"
-      class="mr-2">
-    {{ todo.title }}
-    </div>
+    <h1 class="text-3xl font-bold underline p-0.5 mb-1.5">
+      Formulario
+    </h1>
+    <input
+    v-model="name"
+    type="text"
+    class="border border-gray-300 rounded p-2"
+    >
+    <br>
+    {{ name }}
+
+    <br><br><br>
+
+    <select v-model="pageCount" class="border border-gray-300 rounded p-2">
+      <option value="5">5</option>
+      <option value="10">10</option>
+      <option value="15">15</option>
+    </select>
   </div>
+
+      <br><br><br>
+    <input
+    v-model="user.firstName"
+    type="text"
+    class="border border-gray-300 rounded p-2"
+    >
+    <input
+    v-model="user.lastName"
+    type="text"
+    class="border border-gray-300 rounded p-2"
+    >
+    <br>
+    {{ firstName }}
+    {{ lastName }}
+    <br><br><br>
+
 </template>
 
 <!-- eslint-disable vue/block-lang -->
@@ -28,58 +46,41 @@ export default {
   },
   data() {
     return {
+      name: '',
+      pageCount: 5,
       user: {
-        name: 'John Doe',
-        lastName: 'Doe',
+        firstName: '',
+        lastName: ''
       },
-      todos:[
-          {
-            "userId": 1,
-            "id": 1,
-            "title": "delectus aut autem",
-            "completed": false
-          },
-          {
-            "userId": 1,
-            "id": 2,
-            "title": "quis ut nam facilis et officia qui",
-            "completed": false
-          },
-          {
-            "userId": 1,
-            "id": 3,
-            "title": "fugiat veniam minus",
-            "completed": false
-          },
-          {
-            "userId": 1,
-            "id": 4,
-            "title": "et porro tempora",
-            "completed": true
-          },
-          {
-            "userId": 1,
-            "id": 5,
-            "title": "laboriosam mollitia et enim quasi adipisci quia provident illum",
-            "completed": false
-          }
-        ],
-
     }
   },
   computed: {
-    fullName() {
-      return `${this.user.name} ${this.user.lastName}`;
+  },
+  watch: {
+    name(vl) {
+      if(vl.length > 3) {
+              this.saveUser();
+      }
     },
-    unCompleted(){
-      return this.todos.filter(todo => todo.completed === false);
+    pageCount(vl) {
+      this.changePageCount(vl);
     },
-     completed(){
-      return this.todos.filter(todo => todo.completed === true);
+    user: {
+      handler(){
+        console.log("mudou", this.user);
+      },
+      deep: true,
     }
   },
   methods: {
+    saveUser() {
+      console.log(this.name);
+
+    },
+    changePageCount(vl) {
+      console.log("trocado", vl);
   },
+}
 }
 </script>
 
