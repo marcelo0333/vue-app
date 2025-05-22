@@ -1,86 +1,73 @@
 <template>
   <div>
-    <h1 class="text-3xl font-bold underline p-0.5 mb-1.5">
-      Formulario
-    </h1>
-    <input
-    v-model="name"
-    type="text"
-    class="border border-gray-300 rounded p-2"
-    >
-    <br>
-    {{ name }}
-
-    <br><br><br>
-
-    <select v-model="pageCount" class="border border-gray-300 rounded p-2">
-      <option value="5">5</option>
-      <option value="10">10</option>
-      <option value="15">15</option>
-    </select>
+  <HeaderApp v-if="showHeader"/>
+    <h1 class="text-2xl font-bold text-center mt-4">Hello {{ name }}</h1>
+    <button @click="showHeader = !showHeader" class="bg-blue-500 text-white px-4 py-2 rounded mt-4">
+      Toggle Header
+    </button>
   </div>
-
-      <br><br><br>
-    <input
-    v-model="user.firstName"
-    type="text"
-    class="border border-gray-300 rounded p-2"
-    >
-    <input
-    v-model="user.lastName"
-    type="text"
-    class="border border-gray-300 rounded p-2"
-    >
-    <br>
-    {{ firstName }}
-    {{ lastName }}
-    <br><br><br>
-
 </template>
 
 <!-- eslint-disable vue/block-lang -->
 <script>
+import HeaderApp from './components/HeaderApp.vue';
+
+
 export default {
   name: 'App',
   components: {
+    HeaderApp,
   },
   data() {
     return {
-      name: '',
-      pageCount: 5,
-      user: {
-        firstName: '',
-        lastName: ''
-      },
+      name: 'Diabgeet',
+      showHeader: true,
     }
   },
   computed: {
   },
   watch: {
-    name(vl) {
-      if(vl.length > 3) {
-              this.saveUser();
-      }
-    },
-    pageCount(vl) {
-      this.changePageCount(vl);
-    },
-    user: {
-      handler(){
-        console.log("mudou", this.user);
-      },
-      deep: true,
-    }
   },
   methods: {
-    saveUser() {
-      console.log(this.name);
-
-    },
-    changePageCount(vl) {
-      console.log("trocado", vl);
   },
-}
+  // Criação
+    //Preparar o Componente
+    //Ajax, Inicializar variaveis
+    //Sem acesso ao DOM
+  // Montagem
+    //Inicializar Lib Externa (new Lib())
+    //Precisa de acesso ao DOM
+    //Tem acesso ao DOM
+  //Atualização
+    //Debug
+    //Update
+  //Desmontagem
+    //Remover tudo aquilo que for necessario (lib->destroy)
+    //Para assim liberar memória.
+
+  //Hooks
+
+  // beforeCreate() {
+  //   console.log('beforeCreate');
+  //     console.log("Estado:", this.name);
+  //     console.log("DOM", this.$el);
+  //   // Aqui podemos inicializar uma lib externa
+  // },
+  // created() {
+  //   console.log('created');
+  //       console.log("Estado:", this.name);
+  //             console.log("DOM", this.$el);
+
+  //   // this.$emit('update:show', false);
+  // },
+  // beforeMount() {
+  //   console.log('beforeMount');
+  //       console.log("Estado:", this.name);
+  //             console.log("DOM", this.$el);
+
+  //   // Aqui podemos inicializar uma lib externa
+  // },
+
 }
 </script>
 
