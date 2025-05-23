@@ -12,9 +12,26 @@
   </header>
 </template>
 
-<script lang="ts">
+// eslint-disable-next-line vue/block-lang
+<script >
 export default {
+  mounted() {
+    window.addEventListener('resize', this.resize());
 
+  },
+  beforeUnmount() {
+    console.log('beforeUnmount');
+    window.removeEventListener('resize', this.resize());
+
+  },
+  unmounted() {
+    console.log('unmounted');
+  },
+  methods: {
+    resize($event) {
+      console.log($event);
+    },
+  }
 }
 </script>
 

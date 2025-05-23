@@ -51,7 +51,8 @@
 </template>
 <!-- eslint-disable vue/block-lang -->
 <script>
-import HeaderApp from './components/HeaderApp.vue'
+import HeaderApp from './components/HeaderApp.vue';
+
 
 export default {
   name: 'App',
