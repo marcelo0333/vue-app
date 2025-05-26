@@ -1,6 +1,7 @@
 <template>
   <div :class="baseClass">
     <slot />
+    <button @click="onClick">X</button>
   </div>
 </template>
 <script lang="ts">
@@ -16,11 +17,18 @@ export default {
     baseClass(){
       return ['alert', this.variant ? `alert-${this.variant}`:'']
     }
+  },
+  methods:{
+    onClick(){
+      this.$emit('close')
+    }
   }
 }
 </script>
 <style scoped>
 .alert {
+  display: flex;
+  justify-content: space-between;
   background-color: #303030;
   padding: 15px;
   margin: 20px;
