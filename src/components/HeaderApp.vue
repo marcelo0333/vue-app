@@ -1,22 +1,22 @@
 <template>
   <header class="bg-gray-800 text-white p-4 flex justify-between items-center">
-    <h1 class="text-2xl font-bold">Diabgeet</h1>
-    <nav>
-      <ul class="flex space">
-        <li class="mr-4"><a href="#" class="text-white hover:text-gray-400">Home</a></li>
-        <li class="mr-4"><a href="#" class="text-white hover:text-gray-400">About</a></li>
-        <li class="mr-4"><a href="#" class="text-white hover:text-gray-400">Contact</a></li>
-        <li><a href="#" class="text-white hover:text-gray-400">Login</a></li>
-      </ul>
-    </nav>
+    <slot/>
+    <slot name="header">
+      <h1 class="text-2xl font-bold">Vulo</h1>
+      </slot>
+    <slot name="description">
+      <h2 class="text-lg"></h2>
+      </slot>
+    <slot name="title">
+      <h1 class="text-2xl font-bold"></h1>
+      </slot>
   </header>
 </template>
 
-// eslint-disable-next-line vue/block-lang
 <script >
 export default {
   mounted() {
-    window.addEventListener('resize', this.resize());
+    console.log('mounted', this.$slot());
 
   },
   beforeUnmount() {
@@ -36,5 +36,16 @@ export default {
 </script>
 
 <style>
-
+#appH {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+}
+h1 {
+  font-size: 2em;
+  font-weight: bold;
+  color: #ff0000;
+}
 </style>

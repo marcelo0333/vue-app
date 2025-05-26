@@ -1,80 +1,67 @@
 
 
 <template>
-  <HeaderApp v-if="showHeader" />
   <div>
-    One Wat data binding <br>
-    Two-way data binding<br>
-    v-model -> formulários
+    <BaseAlert :variant="variant">
+      {{ texto }}
+    </BaseAlert>
   </div>
-
-  <div class="text-gray hover:text-gray-400">
-    <label >  Nome  </label>
-      <input
-      class="browser-default border-2 border-gray-300 rounded-lg p-2"
-      type="text"
-      v-model="name">
-      <br>
-    <p>{{ name }}</p>
-
+  <div @click="changeVariant">
+    <BaseCard/>
   </div>
-  <div class>
-      <label >  Nome  </label>
-        <input
-        class="browser-default border-2 border-gray-300 rounded-lg p-2"
-        type="text"
-        v-model="name">
-        <br>
-      <p>{{ name }}</p>
-  </div>
-
-  <div>
-    <label for="sport">Choose a sport:</label>
-    <select v-model="sports" id="sport">
-      <option value="">Escolha</option>
-      <option value="soccer">Soccer</option>
-      <option value="basketball">Basketball</option>
-      <option value="tennis">Tennis</option>
-      <option value="baseball">Baseball</option>
-    </select>
-    {{ sports.text }}
-  </div>
-
-  <div>
-
-    <label> Cores</label>
-    <input type="checkbox" value="azul" v-model="colors"> azul
-     <input type="checkbox" value="amarelo" v-model="colors"> amarelo
-    {{ colors }}
-  </div>
-
 </template>
 <!-- eslint-disable vue/block-lang -->
 <script>
-import HeaderApp from './components/HeaderApp.vue';
-
+import BaseAlert from '@/components/BaseAlert.vue';
+import BaseCard from '@/components/BaseCard.vue';
 
 export default {
   name: 'App',
   components: {
-    HeaderApp,
+    BaseAlert,
+    BaseCard,
   },
   data() {
     return {
-      showHeader: true,
-      name: 'Marcelo',
-      var: 'text',
-      sports: '',
-      colors: [],
+      variant: 'error',
+      texto: 'erro'
     }
-  }
+  },
+  methods: {
+    changeVariant(event) {
+      console.log(event);
+      this.variant = this.variant === 'error' ? 'success' : 'error';
+      if(this.variant === 'error'){
+        this.texto = 'Há um erro no retorno'
+      }else{
+        this.texto = 'Sucesso no envio'
+      }
+
+      console.log(this.variant);
+
+    }
+  },
+  watch: {
+  },
+  computed: {
+  },
+  beforeCreate() {
+  },
+  created() {
+  },
+  beforeMount() {
+  },
+  mounted() {
+  },
+  beforeUnmount() {
+  },
+  unmounted() {
+  },
+
 }
 </script>
 <style scoped>
 
-.text{
-  color: aliceblue;
-}
 
 
 </style>
